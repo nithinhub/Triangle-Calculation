@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Triangle calculator</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 10px;
+                place-items: center;
+            }
+            .container {
+                display: flex;
+                
+                background-color: #ade7a1;
+                text-align: center;
+                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                gap: 0px;
+                border: 2px solid #2E8B57;
+                padding: 20px;
+                max-width: 800px;
+                border-radius: 3px;
+                box-shadow: #2E8B57 0px 0px 10px;
+            }
+
+            .caltit {
+                color: #2E8B57;
+                text-shadow: 4px 0px 3px rgba(102, 221, 108, 0.699);
+                animation-duration: 3s;
+                animation-name: mymove;
+                animation: infinite;
+                animation-direction: alternate;
+                
+                
+            }
+            @keyframes mymove {
+                from {text-shadow: 4px 0px 3px rgba(102, 221, 108, 0.699);}
+                to {text-shadow: 4px 0px 20px rgba(102, 221, 108, 0.899);}
+            }
+            label, input, button {
+                display: block;
+                margin: 10px 0;
+                border: #2E8B57 2px solid;
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 16px;
+                text-align: center;
+                box-shadow: #2E8B57 0px 0px 3px;
+            }
+            #result {
+                margin-top: 20px;
+                font-weight: bold;
+                color: #a53b3b;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body> 
+        <div class = "container">
+        <h1 class="caltit">Triangle Area Calculator</h1>
+        <label for ="base"><b>Base</b> (b):</label>
+        <input type ="number" id ="base" placeholder="Enter the base of Triangle">
+        <label for = "height">Height (h): </label>
+        <input type ="number" id ="height" placeholder="Enter the height of Triangle">
+        <button onclick="calculateArea()">Calculate Area</button>
+
+        
+        <h1 class="caltit">Triangle Perimeter Calculator</h1>
+        <p>Click the button to enter the lengths of the three sides of the triangle.</p>    
+        <div id="perimeter"></div>
+        <input type="number" id="sideA" placeholder="Enter length of side A">
+        <input type="number" id="sideB" placeholder="Enter length of side B">
+        <input type="number" id="sideC" placeholder="Enter length of side C">
+        <button onclick="PerimeterTriangle()">Calculate Perimeter</button>
+        
+
+
+        
+        
+
+        <div id="result"></div>
+
+        </div>
+        <script>
+            // Logic extracted for testability
+            function getTriangleArea(base, height) {
+                if (isNaN(base) || base <= 0 || isNaN(height) || height <= 0) {
+                    return null;
+                }
+                return 0.5 * base * height;
+            }
+
+            function getTrianglePerimeter(sideA, sideB, sideC) {
+                if (isNaN(sideA) || sideA <= 0 || isNaN(sideB) || sideB <= 0 || isNaN(sideC) || sideC <= 0) {
+                    return null;
+                }
+                return sideA + sideB + sideC;
+            }
+
+            function calculateArea(){
+                const base = parseFloat(document.getElementById('base').value);
+                const height = parseFloat(document.getElementById('height').value);
+
+                const area = getTriangleArea(base, height);
+
+                if (area === null) {
+                    document.getElementById('result').innerText = 'Please enter valid base and height values.';
+                    return;
+                }
+                document.getElementById('result').innerText = 'The area of the triangle is: ' + area.toFixed(3);
+            }
+
+            function PerimeterTriangle(){
+                const sideA = parseFloat(document.getElementById('sideA').value);
+                const sideB = parseFloat(document.getElementById('sideB').value);
+                const sideC = parseFloat(document.getElementById('sideC').value);
+
+                const perimeter = getTrianglePerimeter(sideA, sideB, sideC);
+
+                if (perimeter === null) {
+                    document.getElementById('result').innerText = 'Please enter valid lengths for all sides.';
+                    return;
+                }
+                document.getElementById('result').innerText = 'The perimeter of the triangle is: ' + perimeter.toFixed(3);
+            }
+        </script>
+     </body>
+    </html>
+         
